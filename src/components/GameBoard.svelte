@@ -37,6 +37,9 @@
   );
 
   let aiPlayers = $derived(gameState.players.slice(1));
+  let aiTurnTrigger = $derived(
+    `${gameState.phase}:${gameState.currentPlayerIndex}:${gameState.discardPile.length}`
+  );
 
   function getAIPositions(): Array<'right' | 'top' | 'left'> {
     if (aiPlayers.length === 1) return ['top'];
@@ -71,6 +74,7 @@
 
   // Auto-run AI turns
   $effect(() => {
+    void aiTurnTrigger;
     if (
       gameState.phase === 'playing' &&
       currentPlayer.isAI
