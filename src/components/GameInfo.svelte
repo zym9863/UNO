@@ -12,7 +12,7 @@
 </script>
 
 <div class="game-info">
-  <div class="direction" class:reversed={direction === -1}>
+  <div class="direction" class:reversed={direction === 1}>
     &#x27F3;
   </div>
   <div class="color-indicator" style="background: {COLOR_HEX[currentColor]}"></div>
