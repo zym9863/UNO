@@ -18,6 +18,7 @@ function createInitialState(): GameState {
     phase: 'menu',
     winner: null,
     lastPlayedBy: null,
+    wildDraw4BaseColor: null,
   };
 }
 
@@ -50,6 +51,7 @@ export function startGame(aiCount: number) {
     phase: 'playing' as const,
     winner: null,
     lastPlayedBy: null,
+    wildDraw4BaseColor: null,
   });
 }
 
@@ -104,12 +106,14 @@ export function playCard(card: Card, playerIndex: number) {
   const cardIdx = player.hand.findIndex(c => c.id === card.id);
   if (cardIdx === -1) return;
 
+  const currentColorBeforePlay = gameState.currentColor;
   player.hand.splice(cardIdx, 1);
   gameState.discardPile.push(card);
   gameState.lastPlayedBy = playerIndex;
 
   if (card.type === 'wild' || card.type === 'wild_draw4') {
     if (card.type === 'wild_draw4') {
+      gameState.wildDraw4BaseColor = currentColorBeforePlay;
       if (player.isAI) {
         const color = chooseColor(player.hand);
         gameState.currentColor = color;
@@ -129,6 +133,7 @@ export function playCard(card: Card, playerIndex: number) {
       }
     }
     // Regular wild
+    gameState.wildDraw4BaseColor = null;
     if (player.isAI) {
       const color = chooseColor(player.hand);
       gameState.currentColor = color;
@@ -141,6 +146,7 @@ export function playCard(card: Card, playerIndex: number) {
     return;
   }
 
+  gameState.wildDraw4BaseColor = null;
   gameState.currentColor = card.color!;
   if (checkWin(player)) return;
   applyCardEffect(card);
@@ -196,11 +202,12 @@ export function chooseWildColor(color: Color) {
 function handleAIChallenge(playedByIdx: number, challengerIdx: number) {
   const playedBy = gameState.players[playedByIdx];
   const doChallenge = shouldChallenge(false);
+  const baseColor = gameState.wildDraw4BaseColor;
 
   if (doChallenge) {
     const wasLegal = isWildDraw4Legal(
       [...playedBy.hand],
-      gameState.currentColor,
+      baseColor ?? gameState.currentColor,
     );
     if (wasLegal) {
       drawCards(gameState.players[challengerIdx], 6);
@@ -211,6 +218,7 @@ function handleAIChallenge(playedByIdx: number, challengerIdx: number) {
     drawCards(gameState.players[challengerIdx], 4);
   }
 
+  gameState.wildDraw4BaseColor = null;
   gameState.phase = 'playing';
   advanceTurn(1);
 }
@@ -223,9 +231,10 @@ function applyDraw4(doChallenge: boolean) {
   const playedByIdx = gameState.lastPlayedBy!;
   const playedBy = gameState.players[playedByIdx];
   const challengerIdx = getNextPlayerIndex(playedByIdx, gameState.direction, gameState.players.length);
+  const baseColor = gameState.wildDraw4BaseColor;
 
   if (doChallenge) {
-    const wasLegal = isWildDraw4Legal(playedBy.hand, gameState.currentColor);
+    const wasLegal = isWildDraw4Legal(playedBy.hand, baseColor ?? gameState.currentColor);
     if (wasLegal) {
       drawCards(gameState.players[challengerIdx], 6);
     } else {
@@ -235,6 +244,7 @@ function applyDraw4(doChallenge: boolean) {
     drawCards(gameState.players[challengerIdx], 4);
   }
 
+  gameState.wildDraw4BaseColor = null;
   gameState.phase = 'playing';
   advanceTurn(1);
 }

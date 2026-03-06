@@ -29,6 +29,7 @@ export interface GameState {
   phase: Phase;
   winner: number | null;
   lastPlayedBy: number | null;
+  wildDraw4BaseColor: Color | null;
 }
 
 export const COLORS: Color[] = ['red', 'yellow', 'green', 'blue'];
