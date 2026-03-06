@@ -8,34 +8,37 @@
 </script>
 
 {#if visible}
-  <button class="uno-btn" onclick={onclick}>
+  <button class="uno-btn brutalist-button bangers-font" onclick={onclick}>
     UNO!
   </button>
 {/if}
 
 <style>
   .uno-btn {
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-family: 'Arial Black', Arial, sans-serif;
-    padding: 12px 32px;
-    border-radius: 50px;
-    border: 3px solid #fff;
+    background: var(--uno-red);
+    color: var(--uno-white);
+    font-size: 2.5rem;
+    padding: 10px 40px;
+    border: var(--border-thick);
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
-    transition: transform 0.15s;
-    letter-spacing: 2px;
+    box-shadow: 6px 6px 0px var(--uno-black);
+    transition: transform 0.1s, box-shadow 0.1s;
     animation: pulse 1s infinite alternate;
+    position: absolute;
+    bottom: 250px;
+    right: 50px;
+    transform: rotate(-10deg);
+    z-index: 50;
   }
 
   .uno-btn:hover {
-    transform: scale(1.1);
+    transform: rotate(-10deg) translate(-2px, -2px) scale(1.1);
+    box-shadow: 10px 10px 0px var(--uno-black);
   }
 
   @keyframes pulse {
-    from { box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4); }
-    to { box-shadow: 0 4px 24px rgba(255, 0, 0, 0.8); }
+    from { color: var(--uno-yellow); }
+    to { color: var(--uno-white); }
   }
 </style>
+

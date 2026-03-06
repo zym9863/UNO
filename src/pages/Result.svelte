@@ -23,23 +23,23 @@
 </script>
 
 <div class="result">
-  <h1 class="winner-title">
-    {winner.name === 'You' ? 'You Win!' : `${winner.name} Wins!`}
-  </h1>
+  <div class="winner-title bangers-font">
+    {winner.name === 'You' ? 'YOU SURVIVED!' : `${winner.name} SLAUGHTERED YOU!`}
+  </div>
 
-  <div class="scoreboard">
-    <h2>Scores</h2>
+  <div class="scoreboard brutalist-panel">
+    <h2 class="bangers-font">THE CARNAGE</h2>
     {#each scores as entry}
       <div class="score-row" class:winner={entry.isWinner}>
-        <span class="name">{entry.name}</span>
-        <span class="score">{entry.isWinner ? 'WINNER' : `${entry.score} pts remaining`}</span>
+        <span class="name bangers-font">{entry.name}</span>
+        <span class="score">{entry.isWinner ? 'WINNER' : `${entry.score} PTS`}</span>
       </div>
     {/each}
   </div>
 
   <div class="actions">
-    <button class="btn primary" onclick={onrestart}>Play Again</button>
-    <button class="btn secondary" onclick={onmenu}>Main Menu</button>
+    <button class="brutalist-button play-again" onclick={onrestart}>PLAY AGAIN</button>
+    <button class="brutalist-button menu-btn" onclick={onmenu}>MAIN MENU</button>
   </div>
 </div>
 
@@ -47,81 +47,74 @@
   .result {
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse at center, #1a5c2a 0%, #0d3318 60%, #091a0e 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 32px;
-    color: #fff;
-    font-family: 'Arial Black', Arial, sans-serif;
+    gap: 40px;
   }
 
   .winner-title {
-    font-size: 3rem;
-    text-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
-    color: #ffd700;
-    margin: 0;
+    font-size: 6rem;
+    color: var(--uno-red);
+    text-shadow: 4px 4px 0px var(--uno-black), 8px 8px 0px var(--uno-yellow);
+    transform: rotate(-3deg);
+    text-align: center;
   }
 
   .scoreboard {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    padding: 24px 40px;
-    min-width: 300px;
+    width: 400px;
+    background: var(--uno-blue);
+    transform: rotate(2deg);
   }
 
   .scoreboard h2 {
-    margin: 0 0 16px;
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     text-align: center;
-    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    color: var(--uno-white);
+    text-shadow: 2px 2px 0px var(--uno-black);
   }
 
   .score-row {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1rem;
+    padding: 10px 16px;
+    background: var(--uno-white);
+    border: 2px solid var(--uno-black);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 0px var(--uno-black);
   }
 
   .score-row.winner {
-    color: #ffd700;
+    background: var(--uno-yellow);
+    transform: scale(1.05) translateX(-10px);
+    box-shadow: 4px 4px 0px var(--uno-black);
+    z-index: 10;
+  }
+
+  .name {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
   }
 
   .score {
-    font-weight: normal;
-    font-family: Arial, sans-serif;
+    font-weight: 700;
   }
 
   .actions {
     display: flex;
-    gap: 16px;
+    gap: 24px;
+    transform: rotate(-1deg);
   }
 
-  .btn {
-    padding: 14px 36px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 50px;
-    border: 3px solid #fff;
-    cursor: pointer;
-    transition: transform 0.2s;
-    font-family: 'Arial Black', Arial, sans-serif;
-    color: #fff;
+  .play-again {
+    background: var(--uno-green);
   }
 
-  .btn:hover {
-    transform: scale(1.05);
-  }
-
-  .primary {
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
-  }
-
-  .secondary {
-    background: rgba(255, 255, 255, 0.15);
+  .menu-btn {
+    background: var(--uno-white);
   }
 </style>
+

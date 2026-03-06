@@ -145,7 +145,7 @@
   .board {
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse at center, #1a5c2a 0%, #0d3318 60%, #091a0e 100%);
+    
     display: flex;
     flex-direction: column;
     position: relative;

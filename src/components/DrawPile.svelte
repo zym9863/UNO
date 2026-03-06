@@ -9,16 +9,22 @@
 </script>
 
 <div class="draw-pile">
-  <div class="label">Draw ({count})</div>
+  <div class="label bangers-font">DRAW ({count})</div>
   <button
     class="draw-card"
     class:can-draw={canDraw}
     onclick={ondraw}
     disabled={!canDraw}
   >
-    <div class="card-back">
-      <span class="back-text">UNO</span>
+    <div class="card-inner">
+      <div class="card-back">
+        <span class="back-text">NO U!</span>
+      </div>
     </div>
+    <!-- Stack effect -->
+    <div class="stack stack-1"></div>
+    <div class="stack stack-2"></div>
+    <div class="stack stack-3"></div>
   </button>
 </div>
 
@@ -27,34 +33,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
   }
 
   .label {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: var(--uno-black);
+    font-size: 1.5rem;
+    background: var(--uno-white);
+    padding: 0 8px;
+    border: var(--border-thick);
+    box-shadow: 2px 2px 0px var(--uno-black);
+    transform: rotate(-3deg);
   }
 
   .draw-card {
-    width: 80px;
-    height: 120px;
-    border-radius: 10px;
-    border: 3px solid #fff;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3), 4px 6px 0 #0d0d1a;
+    position: relative;
+    width: 90px;
+    height: 135px;
+    background: var(--uno-white);
+    border: var(--border-thick);
+    box-shadow: 4px 4px 0px var(--uno-black);
     cursor: default;
-    padding: 0;
-    transition: transform 0.2s;
+    padding: 6px;
+    transition: transform 0.1s;
   }
 
-  .draw-card.can-draw {
-    cursor: pointer;
-    box-shadow: 0 0 12px 3px rgba(100, 200, 255, 0.5), 4px 6px 0 #0d0d1a;
-  }
-
-  .draw-card.can-draw:hover {
-    transform: translateY(-4px);
+  .draw-card .card-inner {
+    width: 100%;
+    height: 100%;
+    background: var(--uno-black);
+    border: 2px solid var(--uno-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
   }
 
   .card-back {
@@ -63,16 +76,49 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse at center, #2d2d5e 0%, #1a1a2e 100%);
-    border-radius: 7px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--uno-black),
+      var(--uno-black) 10px,
+      #222 10px,
+      #222 20px
+    );
   }
 
   .back-text {
-    font-size: 1.1rem;
-    font-weight: 900;
-    font-family: 'Arial Black', Arial, sans-serif;
-    color: #ff4444;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    color: var(--uno-red);
+    text-shadow: 2px 2px 0px var(--uno-yellow);
+    transform: rotate(-10deg);
+    padding: 2px 6px;
+    background: var(--uno-black);
+    border: 2px solid var(--uno-yellow);
+  }
+
+  .stack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--uno-white);
+    border: var(--border-thick);
+    z-index: 1;
+  }
+
+  .stack-1 { top: 4px; left: 4px; z-index: 1; background: var(--uno-blue); }
+  .stack-2 { top: 8px; left: 8px; z-index: 0; background: var(--uno-yellow); }
+  .stack-3 { top: 12px; left: 12px; z-index: -1; background: var(--uno-black); }
+
+  .draw-card.can-draw {
+    cursor: pointer;
+  }
+
+  .draw-card.can-draw:hover {
+    transform: translate(-4px, -4px);
+  }
+
+  .draw-card.can-draw:active {
+    transform: translate(2px, 2px);
   }
 </style>
+

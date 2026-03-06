@@ -9,16 +9,24 @@
   let { onpick }: Props = $props();
 
   const colors: Color[] = ['red', 'yellow', 'green', 'blue'];
+  
+  function getColorVar(color: string) {
+    if (color === 'red') return 'var(--uno-red)';
+    if (color === 'blue') return 'var(--uno-blue)';
+    if (color === 'green') return 'var(--uno-green)';
+    if (color === 'yellow') return 'var(--uno-yellow)';
+    return 'var(--uno-black)';
+  }
 </script>
 
 <div class="overlay">
-  <div class="picker">
-    <h3>Choose a color</h3>
+  <div class="picker brutalist-panel">
+    <h3 class="bangers-font">CHOOSE A COLOR</h3>
     <div class="colors">
       {#each colors as color}
         <button
           class="color-btn"
-          style="background: {COLOR_HEX[color]}"
+          style="background: {getColorVar(color)}"
           aria-label={color}
           onclick={() => onpick(color)}
         ></button>
@@ -31,7 +39,7 @@
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(17, 17, 17, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,17 +47,16 @@
   }
 
   .picker {
-    background: #2a2a4a;
-    border-radius: 16px;
-    padding: 24px 32px;
+    background: var(--uno-white);
+    padding: 30px;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: rotate(-2deg);
   }
 
   h3 {
-    color: #fff;
-    margin: 0 0 16px;
-    font-size: 1.2rem;
+    color: var(--uno-black);
+    margin: 0 0 20px;
+    font-size: 2rem;
   }
 
   .colors {
@@ -60,15 +67,21 @@
   .color-btn {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    border: 4px solid #fff;
+    border: var(--border-thick);
+    box-shadow: 4px 4px 0px var(--uno-black);
     cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: transform 0.1s, box-shadow 0.1s;
     padding: 0;
   }
 
   .color-btn:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 16px 4px rgba(255, 255, 255, 0.3);
+    transform: translate(-2px, -2px) rotate(5deg);
+    box-shadow: 6px 6px 0px var(--uno-black);
+  }
+
+  .color-btn:active {
+    transform: translate(2px, 2px) rotate(-2deg);
+    box-shadow: 0px 0px 0px var(--uno-black);
   }
 </style>
+

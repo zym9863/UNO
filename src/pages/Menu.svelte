@@ -4,32 +4,32 @@
   }
 
   let { onstart }: Props = $props();
-
   let aiCount = $state(3);
 </script>
 
 <div class="menu">
-  <h1 class="title">UNO</h1>
-
-  <div class="settings">
-    <label>
-      AI Opponents
-      <div class="ai-selector">
-        {#each [1, 2, 3] as n}
-          <button
-            class="ai-btn"
-            class:selected={aiCount === n}
-            onclick={() => aiCount = n}
-          >
-            {n}
-          </button>
-        {/each}
-      </div>
-    </label>
+  <div class="hero">
+    <h1 class="title">NO U!</h1>
+    <div class="subtitle brutalist-panel">The most brutal card game</div>
   </div>
 
-  <button class="start-btn" onclick={() => onstart(aiCount)}>
-    Start Game
+  <div class="settings brutalist-panel">
+    <div class="label bangers-font">SELECT YOUR VICTIMS</div>
+    <div class="ai-selector">
+      {#each [1, 2, 3] as n}
+        <button
+          class="ai-btn"
+          class:selected={aiCount === n}
+          onclick={() => aiCount = n}
+        >
+          {n}
+        </button>
+      {/each}
+    </div>
+  </div>
+
+  <button class="start-btn brutalist-button" onclick={() => onstart(aiCount)}>
+    START SLAUGHTER
   </button>
 </div>
 
@@ -37,81 +37,92 @@
   .menu {
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse at center, #1a5c2a 0%, #0d3318 60%, #091a0e 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    color: #fff;
-    font-family: 'Arial Black', Arial, sans-serif;
+    gap: 3rem;
+  }
+
+  .hero {
+    position: relative;
+    text-align: center;
   }
 
   .title {
-    font-size: 6rem;
-    color: #ff4444;
-    text-shadow: 0 4px 16px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2);
-    letter-spacing: 12px;
+    font-size: 12vw;
+    line-height: 0.8;
+    color: var(--uno-red);
+    text-shadow: 
+      4px 4px 0px var(--uno-black),
+      8px 8px 0px var(--uno-yellow),
+      12px 12px 0px var(--uno-blue),
+      16px 16px 0px var(--uno-green);
     margin: 0;
+    transform: rotate(-5deg);
+    z-index: 10;
+    position: relative;
+  }
+
+  .subtitle {
+    position: absolute;
+    bottom: -1rem;
+    right: -10vw;
+    transform: rotate(5deg);
+    background: var(--uno-blue);
+    padding: 0.5rem 1rem;
+    font-weight: 900;
+    font-size: 1.5rem;
+    z-index: 11;
   }
 
   .settings {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    text-align: center;
+    background: var(--uno-yellow);
+    transform: rotate(2deg);
   }
 
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.1rem;
+  .label {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   .ai-selector {
     display: flex;
-    gap: 12px;
+    gap: 1.5rem;
+    justify-content: center;
   }
 
   .ai-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    background: transparent;
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    border: var(--border-thick);
+    background: var(--uno-white);
+    color: var(--uno-black);
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
     cursor: pointer;
-    transition: all 0.2s;
+    box-shadow: 4px 4px 0px var(--uno-black);
+    transition: all 0.1s;
   }
 
   .ai-btn.selected {
-    background: #ff4444;
-    box-shadow: 0 0 16px rgba(255, 0, 0, 0.5);
+    background: var(--uno-red);
+    color: var(--uno-white);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--uno-black);
   }
 
-  .ai-btn:hover {
-    transform: scale(1.1);
+  .ai-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--uno-black);
   }
 
   .start-btn {
-    padding: 16px 48px;
-    font-size: 1.4rem;
-    font-weight: 900;
-    font-family: 'Arial Black', Arial, sans-serif;
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    color: #fff;
-    border: 3px solid #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    letter-spacing: 3px;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 24px rgba(255, 0, 0, 0.4);
-  }
-
-  .start-btn:hover {
-    transform: scale(1.05);
+    font-size: 3rem;
+    background: var(--uno-green);
+    transform: rotate(-2deg);
+    padding: 1rem 3rem;
   }
 </style>
+

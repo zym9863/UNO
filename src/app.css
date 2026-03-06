@@ -1,6 +1,20 @@
-*,
-*::before,
-*::after {
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;700;900&display=swap');
+
+:root {
+  --uno-red: #ff3366;
+  --uno-blue: #00ccff;
+  --uno-green: #00ff66;
+  --uno-yellow: #ffcc00;
+  --uno-black: #111111;
+  --uno-white: #f4f4f0;
+  --border-thick: 4px solid var(--uno-black);
+  --shadow-offset: 6px 6px 0px var(--uno-black);
+  
+  --bg-pattern: radial-gradient(var(--uno-black) 2px, transparent 2px);
+}
+
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,15 +24,53 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
-  background: #091a0e;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--uno-white);
+  background-image: var(--bg-pattern);
+  background-size: 24px 24px;
+  color: var(--uno-black);
 }
 
 #app {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
-  font-family: inherit;
+h1, h2, h3, .bangers-font {
+  font-family: 'Bangers', cursive;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
+
+.brutalist-button {
+  background: var(--uno-yellow);
+  color: var(--uno-black);
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  padding: 0.8rem 2rem;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-offset);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-transform: uppercase;
+}
+
+.brutalist-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--uno-black);
+}
+
+.brutalist-button:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0px 0px 0px var(--uno-black);
+}
+
+.brutalist-panel {
+  background: var(--uno-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-offset);
+  padding: 2rem;
+}
+

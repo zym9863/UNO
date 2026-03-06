@@ -20,7 +20,7 @@
 </script>
 
 <div class="ai-hand {position}" class:active={isActive}>
-  <div class="ai-name">{name} ({cardCount})</div>
+  <div class="ai-name bangers-font">{name} <span class="badge">{cardCount}</span></div>
   <div class="ai-cards">
     {#each dummyCards as card (card.id)}
       <div class="ai-card-slot">
@@ -35,26 +35,63 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    background: var(--uno-white);
+    padding: 10px;
+    border: var(--border-thick);
+    box-shadow: 4px 4px 0px var(--uno-black);
+    position: relative;
+    max-width: 300px;
   }
 
   .ai-hand.active {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 100, 0.6));
+    background: var(--uno-yellow);
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px var(--uno-black);
   }
 
   .ai-name {
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: var(--uno-black);
+    font-size: 1.5rem;
+    position: absolute;
+    top: -15px;
+    background: var(--uno-white);
+    padding: 2px 8px;
+    border: 2px solid var(--uno-black);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .ai-hand.active .ai-name {
+    background: var(--uno-red);
+    color: var(--uno-white);
+  }
+  
+  .badge {
+    background: var(--uno-black);
+    color: var(--uno-white);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
   }
 
   .ai-cards {
     display: flex;
+    padding-top: 10px;
   }
 
   .top .ai-cards {
     flex-direction: row;
+  }
+
+  .left, .right {
+    max-width: 120px;
   }
 
   .left .ai-cards,
@@ -63,7 +100,7 @@
   }
 
   .ai-card-slot {
-    margin-left: -40px;
+    margin-left: -20px;
   }
 
   .ai-card-slot:first-child {
@@ -73,7 +110,7 @@
   .left .ai-card-slot,
   .right .ai-card-slot {
     margin-left: 0;
-    margin-top: -70px;
+    margin-top: -50px;
   }
 
   .left .ai-card-slot:first-child,
@@ -82,21 +119,10 @@
   }
 
   .left .ai-cards :global(.card),
-  .right .ai-cards :global(.card) {
-    --card-width: 50px;
-    --card-height: 75px;
-  }
-
-  .left .ai-cards :global(.card) {
-    transform: rotate(90deg);
-  }
-
-  .right .ai-cards :global(.card) {
-    transform: rotate(-90deg);
-  }
-
+  .right .ai-cards :global(.card),
   .top .ai-cards :global(.card) {
-    --card-width: 55px;
-    --card-height: 82px;
+    --card-width: 60px;
+    --card-height: 90px;
   }
 </style>
+
