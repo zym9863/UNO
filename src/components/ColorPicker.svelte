@@ -19,6 +19,7 @@
         <button
           class="color-btn"
           style="background: {COLOR_HEX[color]}"
+          aria-label={color}
           onclick={() => onpick(color)}
         ></button>
       {/each}
