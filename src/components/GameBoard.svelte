@@ -61,7 +61,6 @@
 
   function handleColorPick(color: Color) {
     chooseWildColor(color);
-    gameState.phase = 'playing';
   }
 
   function handleChallenge(doChallenge: boolean) {

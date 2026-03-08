@@ -219,6 +219,7 @@ function handleAIChallenge(playedByIdx: number, challengerIdx: number) {
   }
 
   gameState.wildDraw4BaseColor = null;
+  if (checkWin(playedBy)) return;
   gameState.phase = 'playing';
   advanceTurn(1);
 }
@@ -245,6 +246,7 @@ function applyDraw4(doChallenge: boolean) {
   }
 
   gameState.wildDraw4BaseColor = null;
+  if (checkWin(playedBy)) return;
   gameState.phase = 'playing';
   advanceTurn(1);
 }
